@@ -220,7 +220,7 @@
               <h1
                 class="mb-6 text-3xl font-bold leading-snug text-white sm:text-4xl sm:leading-snug lg:text-5xl lg:leading-[1.2]"
               >
-                Ali Ikbal - Back End Developer
+                Ali Ikbal - Software Engineer
               </h1>
               <p
                 class="mx-auto mb-9 max-w-[600px] text-base font-medium text-white sm:text-lg sm:leading-[1.44]"
@@ -3887,7 +3887,7 @@
               >
                 Send us a Message
               </h3>
-              <form class="submit contact">
+              <form id="myContact">
                 <div class="mb-[22px]">
                   <label
                     for="name"
@@ -3896,7 +3896,7 @@
                   >
                   <input
                     type="text"
-                    name="name"
+                    name="name" id="name"
                     placeholder="Adam Gelius"
                     class="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6"
                   />
@@ -3909,7 +3909,7 @@
                   >
                   <input
                     type="email"
-                    name="email"
+                    name="email" id="email"
                     placeholder="example@yourmail.com"
                     class="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6"
                   />
@@ -3922,19 +3922,19 @@
                   >
                   <input
                     type="text"
-                    name="phone"
+                    name="phone" id="phone"
                     placeholder="+62 1254 5211 552"
                     class="w-full border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6"
                   />
                 </div>
                 <div class="mb-[30px]">
                   <label
-                    for="alamat"
+                    for="addres"
                     class="mb-4 block text-sm text-body-color dark:text-dark-6"
                     >Message*</label
                   >
                   <textarea
-                    name="alamat"
+                    name="address" id="address"
                     rows="1"
                     placeholder="type your message here"
                     class="w-full resize-none border-0 border-b border-[#f1f1f1] bg-transparent pb-3 text-body-color placeholder:text-body-color/60 focus:border-primary focus:outline-none dark:border-dark-3 dark:text-dark-6"
@@ -3942,7 +3942,7 @@
                 </div>
                 <div class="mb-0">
                   <button
-                    type="submit"
+                    type="button"  onclick="getFormData()"
                     class="btn-kirim inline-flex items-center justify-center rounded-md bg-primary px-10 py-3 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-blue-dark"
                   >
                     Send
@@ -4382,33 +4382,28 @@
     <!-- ====== Back To Top End -->
 
     <!-- contact -->
+ 
     <script>
-      const scriptURL =
-        "https://script.google.com/macros/s/AKfycbwRk2-xYcd9LOu0W5RqGhJEpdGVDGRZUrfYEeiQJ40AYeMT_YOl1cTax3-DE1woFJQLng/exec";
-      const form = document.forms["submit contact"];
-      const btnKirim = document.querySelector(".btn-kirim");
-      // const btnLoadaing = document.querySelector(".btn-loading");
-      // const myAlert = document.querySelector(".alert-form");
+      function getFormData(){
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+        var address = document.getElementById('address').value;
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
+        var message = `Hallo Selamat Datang *${name}* di web portofolio Ali Ikbal\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nAddress: ${address}\n\nTerimakasih Sudah Menghubungi *Ali Ikbal*`;
 
-        //tampilkan tombol loading
-        // btnLoadaing.classList.toggle("d-none");
-        // btnKirim.classList.toggle("d-none");
-        fetch(scriptURL, { method: "POST", body: new FormData(form) })
-          .then((response) => {
-            btnLoadaing.classList.toggle("d-none");
-            btnKirim.classList.toggle("d-none");
-            //menampilkan alert
-            myAlert.classList.toggle("d-none");
-            //reset form
-            form.reset();
-            console.log("Success!", response);
-          })
-          .catch((error) => console.error("Error!", error.message));
-      });
+        // Encode the message for URL
+        var encodedMessage = encodeURIComponent(message);
 
+        // Create WhatsApp URL
+        var whatsappUrl = `https://wa.me/628815101286?text=${encodedMessage}`;
+
+        // Redirect to WhatsApp
+        window.location.href = whatsappUrl;
+        console.log(name , email, phone, address);
+        //alert('Name: ' + name + '\nEmail: ' + email + '\nMessage: ' + phone);
+
+      }
     </script>
 
     <!-- ====== All Scripts -->
